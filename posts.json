@@ -1,0 +1,14 @@
+[
+    {
+        "postHeading": "Hello world",
+        "author": "Admin",
+        "date": "01/15/2017",
+        "message": "Hi, my name is Dmytro. I'm glad to see you" 
+    },
+    {
+        "postHeading": "About me",
+        "author": "Guest",
+        "date": "03/23/2017",
+        "message": "Hello, I am guest here. Nice to meet you"
+    }
+]

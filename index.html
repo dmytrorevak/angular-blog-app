@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Angular Blog</title>
+    <link rel="stylesheet" href="assets/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <script src="assets/lib/angular/angular.min.js"></script>
+    <script src="assets/lib/jquery/jquery-3.1.1.min.js"></script>
+    <script src="assets/lib/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body ng-app="blogApp" class="bg-info">
+    <div class="container" ng-controller="blogCtrl as blog">
+        <div class="modal-window" ng-if="blog.isPasswordModalVisible">
+            <div class="modal-content">
+                <div class="form-group">
+                    <label for="login-field">Login</label>
+                    <input type="text" id="login-field" class="form-control" ng-model="blog.login" required>
+                </div>
+                <div class="form-group">
+                    <label for="password-field">Password</label>
+                    <input type="password" id="password-field" class="form-control" ng-model="blog.password" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" ng-click="blog.adminVerification()">Enter</button>
+                    <button type="button" class="btn btn-primary" ng-click="blog.continueLikeGuest()">Continue</button>
+                    <div class="text-wrapper text-left text-danger">
+                        <span>{{blog.passwordWarning}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h1 class="text-center">Hello {{blog.userStatus}}</h1>
+        <div class="form-group">
+            <label for="post-topic-field">Topic</label>
+            <input type="text" id="post-topic-field" class="form-control" ng-model="blog.newPostTopic" required>
+        </div>
+        <div class="form-group">
+            <label for="post-message-field">Message</label>
+            <textarea id="post-message-field" class="form-control" ng-model="blog.newPostMessage" required></textarea>
+        </div>
+        <button type="button" class="btn btn-success" ng-click="blog.addNewPost()">Add</button>
+        <div class="posts-container">
+            <div class="panel panel-primary post-item" ng-repeat="post in blog.postList">
+                <div class="panel-heading">
+                    <h2 class="panel-title">
+                        <span class="panel-heading-text">{{post.postHeading}}</span>
+                        <span class="glyphicon glyphicon-time time-icon" aria-hidden="true"></span>
+                        <small>
+                            <span class="post-author">Posted by {{post.author}}</span>
+                            <time class="post-time">{{post.date}}</time>
+                        </small>
+                    </h2>
+                    <button type="button" class="btn btn-xs btn-info" ng-click="blog.changePost(post)">Change</button>
+                    <button type="button" class="btn btn-xs btn-danger" ng-click="blog.removePost(post)">Remove</button>
+                </div>
+                <div class="panel-body">
+                    {{post.message}}
+                </div>
+            </div>
+        </div>
+        <div class="modal-window" ng-if="blog.isEditingModalVisible">
+            <div class="modal-content">
+                <div class="form-group">
+                    <label for="post-changing-topic-field">Topic</label>
+                    <input type="text" id="post-changing-topic-field" class="form-control" ng-model="blog.changingTopic" required>
+                </div>
+                <div class="form-group">
+                    <label for="post-changing-message-field">Message</label>
+                    <textarea id="post-changing-message-field" class="form-control" ng-model="blog.changingMessage" required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="blog.saveChanges()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="app/app.js"></script>
+    <script src="app/controllers/blog.controller.js"></script>
+</body>
+</html>
